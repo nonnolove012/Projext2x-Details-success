@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/1/page.js", "src/app/2/page.js", "src/app/dcondo/page.js", "src/app/golf-view/page.js", "src/app/kave/page.js", "src/app/sunta/page.js", "src/app/tu-dome/page.js", "src/app/jpark/page.js", "src/app/layout.js", "src/app/page.js"],
+  "exclude": ["node_modules"]
+}
