@@ -2,8 +2,6 @@
 
 import { useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import '@/app/globals.css';
 import './sunta.css';
 
 export default function KavePage() {
@@ -21,41 +19,39 @@ export default function KavePage() {
     figures.forEach(fig => observer.observe(fig));
   }, []);
 
+  const dorms = [
+    { src: 'sunta.jpg', alt: 'sunta', label: 'Sunta', href: '/sunta/sunta1' },
+    { src: 'hiso.webp', alt: 'hiso', label: 'Hiso Place', href: '/sunta/hiso' },
+    { src: 'the charn.jpg', alt: 'thecharn', label: 'The Charn', href: '/sunta/thecharn' },
+    { src: 'loft.webp', alt: 'loft', label: 'Loft Loft Dormitory', href: '/sunta/loft' },
+  ];
+
   return (
     <>
       <header className="navbar">
         <div className="logo">PROJECT 2X</div>
       </header>
 
-      {/* ปุ่มย้อนกลับ */}
-      <Link href="/" className="back-btn" aria-label="ย้อนกลับ">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-          <path fillRule="evenodd" d="M15 8a.5.5 0 0 1-.5.5H3.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708.708L3.707 7.5H14.5A.5.5 0 0 1 15 8z" />
-        </svg>
-      </Link>
-
       <h1>โซน F</h1>
 
       <div className="gallery">
-        {[
-          { src: 'sunta.jpg', alt: 'sunta', label: 'Sunta' },
-          { src: 'hiso.webp', alt: 'hiso', label: 'Hiso Place' },
-          { src: 'the charn.jpg', alt: 'thecharn', label: 'The Charn' },
-        ].map(({ src, alt, label }) => (
-          <figure key={alt}>
-            <Image
-              src={`/${src}`}
-              alt={alt}
-              width={320}
-              height={200}
-              style={{
-                borderRadius: '12px',
-                objectFit: 'cover',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
-              }}
-            />
-            <figcaption>{label}</figcaption>
-          </figure>
+        {dorms.map(({ src, alt, label, href }) => (
+          <a href={href} key={alt} aria-label={`ไปยัง ${label}`}>
+            <figure>
+              <Image
+                src={`/${src}`}
+                alt={alt}
+                width={320}
+                height={200}
+                style={{
+                  borderRadius: '12px',
+                  objectFit: 'cover',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                }}
+              />
+              <figcaption>{label}</figcaption>
+            </figure>
+          </a>
         ))}
       </div>
     </>
