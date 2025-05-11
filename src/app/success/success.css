@@ -1,0 +1,77 @@
+.success-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: linear-gradient(to bottom right, #f0f4f8, #e8f0e5);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.success-box {
+  padding: 2rem 2.5rem;
+  border-radius: 24px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  max-width: 420px;
+  text-align: center;
+}
+
+.checkmark {
+  font-size: 60px;
+  color: #4CAF50;
+  margin-bottom: 1rem;
+}
+
+.success-box h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.success-box p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.success-text {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #388e3c;
+}
+
+.button-group {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-home,
+.btn-status {
+  padding: 0.6rem 1.4rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-home {
+  background-color: #A5B78E;
+  color: white;
+}
+
+.btn-home:hover {
+  background-color: #8fa879;
+  transform: translateY(-2px);
+}
+
+.btn-status {
+  background-color: #E7C7C7;
+  color: #333;
+}
+
+.btn-status:hover {
+  background-color: #d9b0b0;
+  transform: translateY(-2px);
+}

@@ -5,12 +5,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import '@/app/globals.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [sidebarActive, setSidebarActive] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [interestOpen, setInterestOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [selectedZone, setSelectedZone] = useState('');
+  const [selectedDorm, setSelectedDorm] = useState('');
+  const router = useRouter();
 
   const toggleSidebar = () => setSidebarActive(!sidebarActive);
   const closeSidebar = () => setSidebarActive(false);
@@ -25,6 +30,9 @@ export default function Home() {
     setLoginOpen(true);
   };
   const closeLogin = () => setLoginOpen(false);
+
+  const openInterestForm = () => setInterestOpen(true);
+  const closeInterestForm = () => setInterestOpen(false);
 
   const showSuccess = (msg) => {
     setSuccessMessage(msg);
@@ -43,12 +51,30 @@ export default function Home() {
     closeLogin();
   };
 
+  const submitInterest = (e) => {
+    e.preventDefault();
+    showSuccess('บันทึกความสนใจเรียบร้อย!');
+    closeInterestForm();
+    router.push('/success'); // ไปหน้าสรุปผล
+  };
+
+  const isLoggedIn = !loginOpen && !registerOpen;
+
+  const dormOptions = {
+    A: ['Jpark Residences', 'The Campus', 'Brownie', 'Fahdome Condo'],
+    B: ['City Park', 'Inter Park', 'Mpdiz launch', 'ทรงพิเชษฐ์', 'บันยันทรี', 'U Plus', 'U House'],
+    C: ['Skyview', 'Vanarin', 'Common TU', 'Terra', 'Tudio', 'Vanda TU'],
+    D: ['Kave Ava', 'Kave TU'],
+    E: ['ยูบ้านสุขสบาย', 'Haus', 'Dcondo1', 'Dcondo2', 'Dcondo3', 'Dcondo4', 'Dcondo Shine', '18/22'],
+    F: ['Sunta', 'Hoso Place', 'The charn', 'Loft Loft'],
+    G: ['TU Dome', 'Keystone', 'Accompark', 'VKP Mansion', 'Fenix Apartment'],
+    H: ['Golf View'],
+  };
+
   return (
     <>
       {successMessage && (
-        <div className="success-toast">
-          {successMessage}
-        </div>
+        <div className="success-toast">{successMessage}</div>
       )}
 
       <header className="navbar">
@@ -65,13 +91,21 @@ export default function Home() {
       </div>
 
       <h1>แนะนำหอพักใกล้ ม.ธรรมศาสตร์ รังสิต</h1>
+
       <div className="maps">
         <Image src="/map.jpg" alt="แผนที่โซนหอพัก" width={600} height={400} />
       </div>
 
+      {isLoggedIn && (
+        <div className="interest-button-container">
+          <button className="interest-button" onClick={openInterestForm}>
+            ลงทะเบียนความสนใจหอพัก
+          </button>
+        </div>
+      )}
+
       <section className="dorm-grid">
-        {[
-          { href: '/jpark', src: 'jpark.png', name: 'J-PARK', zone: 'A' },
+        {[{ href: '/jpark', src: 'jpark.png', name: 'J-PARK', zone: 'A' },
           { href: '/1', src: '1.png', name: 'เชียงราก 1', zone: 'B' },
           { href: '/2', src: '2.png', name: 'เชียงราก 2', zone: 'C' },
           { href: '/kave', src: 'kave.png', name: 'Kave', zone: 'D' },
@@ -88,6 +122,7 @@ export default function Home() {
         ))}
       </section>
 
+      {/* Modal: สมัครสมาชิก */}
       {registerOpen && (
         <div className="modal active">
           <div className="modal-content">
@@ -109,6 +144,7 @@ export default function Home() {
         </div>
       )}
 
+      {/* Modal: Login */}
       {loginOpen && (
         <div className="modal active">
           <div className="modal-content">
@@ -122,6 +158,59 @@ export default function Home() {
               </div>
               <div className="login-bottom">
                 ยังไม่ได้เป็นสมาชิก? <a href="#" onClick={openRegister}>ลงทะเบียน</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: ความสนใจ */}
+      {interestOpen && (
+        <div className="modal active">
+          <div className="modal-content interest-form">
+            <span className="close" onClick={closeInterestForm}>×</span>
+            <h2 className="modal-title">ลงทะเบียนความสนใจหอพัก</h2>
+            <form onSubmit={submitInterest} className="form-layout">
+              <div className="form-group">
+                <label htmlFor="zone">เลือกโซน:</label>
+                <select
+                  id="zone"
+                  className="form-select"
+                  value={selectedZone}
+                  onChange={(e) => {
+                    setSelectedZone(e.target.value);
+                    setSelectedDorm('');
+                  }}
+                  required
+                >
+                  <option value="">กรุณาเลือกโซน</option>
+                  {Object.keys(dormOptions).map((zone) => (
+                    <option key={zone} value={zone}>โซน {zone}</option>
+                  ))}
+                </select>
+              </div>
+
+              {selectedZone && (
+                <div className="form-group">
+                  <label htmlFor="dorm">เลือกหอพัก:</label>
+                  <select
+                    id="dorm"
+                    className="form-select"
+                    value={selectedDorm}
+                    onChange={(e) => setSelectedDorm(e.target.value)}
+                    required
+                  >
+                    <option value="">กรุณาเลือกหอพัก</option>
+                    {dormOptions[selectedZone].map((dorm) => (
+                      <option key={dorm} value={dorm}>{dorm}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              <div className="buttons">
+                <button type="submit" className="btn-register">ส่งข้อมูล</button>
+                <button type="button" className="btn-cancel" onClick={closeInterestForm}>ยกเลิก</button>
               </div>
             </form>
           </div>

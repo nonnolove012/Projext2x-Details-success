@@ -256,3 +256,108 @@ h1 {
   10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
   100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
+
+.interest-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.interest-button {
+  padding: 8px 18px;
+  font-size: 16px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+.interest-button:hover {
+  background-color: var(--primary-color);
+}
+
+/* ฟอร์มความสนใจหอพัก */
+.interest-form {
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+.form-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-select {
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #F0E9DE;
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-register, .btn-cancel {
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-register {
+  background-color: #A5B78E;
+  color: white;
+}
+
+.btn-register:hover {
+  background-color: #8aa173;
+}
+
+.btn-cancel {
+  background-color: #E7C7C7;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background-color: #d1b2b2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
